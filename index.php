@@ -9,7 +9,7 @@
           echo "Lista de postagens: <BR>";
      });
      
-     $app->get('/usuarios/{id}', function($request, $response){
+     $app->get('/usuarios[/{id}]', function($request, $response){
           $id = $request->getAttribute('id');
           echo "Lista de usuários ou ID: {$id}<BR>";
      });
