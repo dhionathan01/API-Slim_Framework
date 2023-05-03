@@ -30,8 +30,10 @@
      // Nomenado rotas:
      $app->get('/meusite', function($request, $response){
           echo "Listar Postagem para um ID";
-     })->setName("blog")
+     })->setName("blog");
 
+     $retorno = $this->get("router")->pathFor("blog", ["id" => "10"]);
+     echo $retorno;
      // Executando a aplicação
 
      $app->run();
