@@ -28,12 +28,17 @@
      });
 
      // Nomenado rotas:
-     $app->get('/meusite', function($request, $response){
+     $app->get('/blog/postagens/{id}', function($request, $response){
           echo "Listar Postagem para um ID";
      })->setName("blog");
 
-     $retorno = $this->get("router")->pathFor("blog", ["id" => "10"]);
-     echo $retorno;
+     $app->get('/meusite', function($request, $response){ 
+          $retorno = $this->get("router")->pathFor("blog", ["id" => "10"]);
+          echo $retorno;
+     });
+
+     
+
      // Executando a aplicação
 
      $app->run();
