@@ -8,16 +8,25 @@
      $app->get('/postagens2', function(){
           echo "Lista de postagens: <BR>";
      });
-     
+     // Parametro opcional
      $app->get('/usuarios[/{id}]', function($request, $response){
           $id = $request->getAttribute('id');
           echo "Lista de usuários ou ID: {$id}<BR>";
      });
+     // Parametros Opcionais
      $app->get('/postagens[/{ano}[/{mes}]]', function($request, $response){
           $ano = $request->getAttribute('ano');
           $mes = $request->getAttribute('mes');
           echo "Lista de postagens Ano: {$ano} mes: {$mes}";
      });
+
+     // Pegando vários valores
+     $app->get('/lista/{itens:.*}', function($request, $response){
+          $itens = $request->getAttribute('itens');
+          echo $itens . "<BR>";
+          var_dump(explode("/", $itens));
+     });
+
      // Executando a aplicação
 
      $app->run();
