@@ -27,6 +27,11 @@
           var_dump(explode("/", $itens));
      });
 
+     // Nomenado rotas:
+     $app->get('/meusite', function($request, $response){
+          echo "Listar Postagem para um ID";
+     })->setName("blog")
+
      // Executando a aplicação
 
      $app->run();
