@@ -39,11 +39,15 @@
 
      // Agrupar rotas
 
-     $app->get('/v1/usuarios', function(){
+     $app->group('/v1', function(){
           echo "Listagem de usuarios";
-     });
-     $app->get('/v1/postagens', function(){
-          echo "Listagem de postagens";
+
+          $this->get('/usuarios', function(){
+               echo "Listagem de usuarios";
+          });
+          $this->get('/postagens', function(){
+               echo "Listagem de postagens";
+          });
      });
 
      // Executando a aplicação
