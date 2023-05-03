@@ -37,7 +37,14 @@
           echo $retorno;
      });
 
-     
+     // Agrupar rotas
+
+     $app->get('/v1/usuarios', function(){
+          echo "Listagem de usuarios";
+     });
+     $app->get('/v1/postagens', function(){
+          echo "Listagem de postagens";
+     });
 
      // Executando a aplicação
 
