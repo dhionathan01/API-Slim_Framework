@@ -1,10 +1,23 @@
 <?php
      require 'vendor/autoload.php';
+     use \Psr\Http\Message\ServerRequestInterface as Request;
+     use \Psr\Http\Message\ResponseInterface as Response;
 
      // Criando objeto para definição das rotas
      $app = new \Slim\App;
+     // Padrão PSR7
+     $app->get('/postagens', function(Request $request, Response $response){
+          // Escreve no corpo da resposta utilizando o padrão PSR7
+          $response->getBody()->write("Listagem de postagens");
+          return $response;
+     });
 
-     // criando rotas e passando uma função para ela
+     // Executando a aplicação
+     $app->run();
+
+
+
+     /* // criando rotas e passando uma função para ela
      $app->get('/postagens2', function(){
           echo "Lista de postagens: <BR>";
      });
@@ -49,7 +62,5 @@
                echo "Listagem de postagens";
           });
      });
+ */
 
-     // Executando a aplicação
-
-     $app->run();
