@@ -5,13 +5,51 @@
 
      // Criando objeto para definição das rotas
      $app = new \Slim\App;
+
      // Padrão PSR7
+     /* 
+     Tipos de requisição ou Verbos HTTP
+
+     get -> Recuperar recursos do servidor (Select)
+     post -> Criar dado no servidor (Insert)
+     put -> Atualizar dados no servidor (Update)
+     delete -> Deletar dados do servidor (Delete)
+     
+     */
+     // Realizando requisição get
      $app->get('/postagens', function(Request $request, Response $response){
           // Escreve no corpo da resposta utilizando o padrão PSR7
           $response->getBody()->write("Listagem de postagens");
           return $response;
      });
+     // Realizando requisição post
+     $app->post('/usuarios/adiciona', function(Request $request, Response $response){
+          //criando uma requisição post
+          // Recupera post($_POST)
+          $post = $request->getParsedBody();
+          $nome = $post['nome'];
+          $email = $post['email'];
 
+          // INSERT INTO para inserir no banco de dados...
+          
+          return $response->getBody()->write("Nome:{$nome} - Email:{$email}");
+     });
+     // Realizando uma requisição put
+     $app->put('/usuarios/atualiza', function(Request $request, Response $response){
+          //criando uma requisição post
+          // Recupera post($_POST)
+          $post = $request->getParsedBody();
+          $id = $post['id'];
+          $nome = $post['nome'];
+          $email = $post['email'];
+          // Atualizar no banco de dados com UPDATE...
+          return $response->getBody()->write("Sucesso ao Atualizar usuario com id: {$id}");
+     });
+     // Realizando uma requisição DELETE
+     $app->delete('/usuarios/remove/{id}', function(Request $request, Response $response){
+          $id = $request->getAttribute('id');
+          return $response->getBody()->write("Sucesso ao Deletar Usuario ID: {$id}");
+     });
      // Executando a aplicação
      $app->run();
 
