@@ -5,6 +5,28 @@
 
      // Criando objeto para definição das rotas
      $app = new \Slim\App;
+     // Container dependency injection
+
+     class Servico {
+
+     }
+     $servico = new Servico;
+     // Criando um container com pimple (ele é instalado juntamente com o slim, pode verificar sua pasta no vendor);
+     // Container Pimple:
+     $container = $app->getContainer();
+     // Fazendo injeção de dependencia
+     $container['servico'] = function(){
+          return new Servico;
+     };
+
+     $app->get('/servico', function(Request $request, Response $response) {
+          // Usando o container
+          $servico = $this->get('servico');
+         var_dump($servico);
+     });
+
+     // Executando a aplicação
+     $app->run();
 
      // Padrão PSR7
      /* 
@@ -17,7 +39,7 @@
      
      */
      // Realizando requisição get
-     $app->get('/postagens', function(Request $request, Response $response){
+/*      $app->get('/postagens', function(Request $request, Response $response){
           // Escreve no corpo da resposta utilizando o padrão PSR7
           $response->getBody()->write("Listagem de postagens");
           return $response;
@@ -49,9 +71,8 @@
      $app->delete('/usuarios/remove/{id}', function(Request $request, Response $response){
           $id = $request->getAttribute('id');
           return $response->getBody()->write("Sucesso ao Deletar Usuario ID: {$id}");
-     });
-     // Executando a aplicação
-     $app->run();
+     }); */
+
 
 
 
