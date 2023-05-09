@@ -4,7 +4,11 @@
      use \Psr\Http\Message\ResponseInterface as Response;
 
      // Criando objeto para definição das rotas
-     $app = new \Slim\App;
+     $app = new \Slim\App([
+          'settings' => [
+               'displayErrorDetails' => true,
+          ]
+          ]);
      // Container dependency injection
 
      class Servico {
@@ -12,19 +16,23 @@
      }
      $servico = new Servico;
      // Criando um container com pimple (ele é instalado juntamente com o slim, pode verificar sua pasta no vendor);
-     // Container Pimple:
-     $container = $app->getContainer();
-     // Fazendo injeção de dependencia
-     $container['servico'] = function(){
-          return new Servico;
-     };
-
+    
      $app->get('/servico', function(Request $request, Response $response) {
           // Usando o container
           $servico = $this->get('servico');
          var_dump($servico);
      });
 
+
+      // Container Pimple:
+      $container = $app->getContainer();
+      // Fazendo injeção de dependencia
+      $container['View'] = function(){
+           return new App\View;
+      };
+ 
+     // Controllers como serviço:
+     $app->get('/usuario', '\App\controllers\Home:index');
      // Executando a aplicação
      $app->run();
 
