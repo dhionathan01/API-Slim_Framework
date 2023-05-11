@@ -9,8 +9,22 @@
                'displayErrorDetails' => true,
           ]
           ]);
-     // Container dependency injection
 
+     /*
+          Tipos de respostas
+          cabeçalho, texto, Json, XML
+     */
+    $app->get('/header', function(Request $request, Response $response) {
+          $response->write('Esse é um retorno header');
+          // Definindo informações de cabeçalho
+          // allow = permitir , PUT = tipo de requisição, essa instrução permite apenas  requisição de put
+          return $response->withHeader('allow', 'PUT')
+                    ->withAddedHeader('Content-Length', 10);
+});
+     $app->run(); 
+
+     // Container dependency injection
+/* 
      class Servico {
 
      }
@@ -34,7 +48,7 @@
      // Controllers como serviço:
      $app->get('/usuario', '\App\controllers\Home:index');
      // Executando a aplicação
-     $app->run();
+     */
 
      // Padrão PSR7
      /* 
