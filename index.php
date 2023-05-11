@@ -20,7 +20,15 @@
           // allow = permitir , PUT = tipo de requisição, essa instrução permite apenas  requisição de put
           return $response->withHeader('allow', 'PUT')
                     ->withAddedHeader('Content-Length', 10);
-});
+     });
+    $app->get('/json', function(Request $request, Response $response) {
+          return $response->withJson([
+               "nome" => "Dhionathan Lanzoni Jobim",
+               "endereco" => "Rua Dom Silverio 544",
+               "email" => "dhionathan321@gmail.com"
+          ]);
+          
+     });
      $app->run(); 
 
      // Container dependency injection
