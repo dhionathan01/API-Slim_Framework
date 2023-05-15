@@ -29,6 +29,12 @@
           ]);
           
      });
+    $app->get('/xml', function(Request $request, Response $response) {
+          $xml = file_get_contents('arquivo.xml');
+          $response->write($xml);
+          return $response->withHeader('Content-type', 'application/xml');
+          
+     });
      $app->run(); 
 
      // Container dependency injection
