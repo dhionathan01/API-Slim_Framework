@@ -38,7 +38,8 @@
      /* Middleware*/
      // Adicionando um middleware
      $app->add(function (Request $request, Response $response, $next) {
-          return $response->write('inicio camada 1+');
+          $response->write('inicio camada 1+');
+          return $next($request, $response);
      });
     $app->get('/middleware_usuarios', function(Request $request, Response $response) {
         
