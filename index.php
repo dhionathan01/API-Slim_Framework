@@ -9,12 +9,14 @@
                'displayErrorDetails' => true,
           ]
           ]);
+          
+     $app->run(); 
 
      /*
           Tipos de respostas
           cabeçalho, texto, Json, XML
      */
-    $app->get('/header', function(Request $request, Response $response) {
+/*     $app->get('/header', function(Request $request, Response $response) {
           $response->write('Esse é um retorno header');
           // Definindo informações de cabeçalho
           // allow = permitir , PUT = tipo de requisição, essa instrução permite apenas  requisição de put
@@ -35,7 +37,7 @@
           return $response->withHeader('Content-type', 'application/xml');
           
      });
-     /* Middleware*/
+     // Middleware
      // Adicionando um middleware
      $app->add(function (Request $request, Response $response, $next) {
           $response->write(' Middleware 1 : inicio camada 1 + ');
@@ -46,7 +48,7 @@
           $response->write(' + Fim da camada 1');
           return $response;
      });
-     /* O middeware são acessados de forma inversa a sua definição logo é executado o segundo o primeiro e entt as rotas da aplicação são liberadas*/
+     // O middeware são acessados de forma inversa a sua definição logo é executado o segundo o primeiro e entt as rotas da aplicação são liberadas
      $app->add(function (Request $request, Response $response, $next) {
           $response->write(' Middleware 2 : inicio camada 2 +');
           $response = $next($request, $response);
@@ -62,8 +64,8 @@
         
           $response->write('Ação principal postagens');
           
-     });
-     $app->run(); 
+     }); */
+
 
      // Container dependency injection
 /* 
