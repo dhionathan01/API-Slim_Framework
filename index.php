@@ -44,17 +44,25 @@
 
           // Inserindo dados na tabela
 
-         /*  $db->table('usuarios')->insert([
+         /*   $db->table('usuarios')->insert([
                'nome' => 'Dhionathan', 'email' => 'dhionathan321@gmail.com'
-          ]); */
+          ]);  */
 
           // Atualizar:
-          $db->table('usuarios')
+          /* $db->table('usuarios')
                     ->where('id', 1)
                     ->update([
                          'nome'=> 'Dhionathan Lanzoni Jobim'
-                    ]);
-
+                    ]); */
+          // Deletar
+         /*  $db->table('usuarios')
+                    ->where('id', 1)
+                    ->delete(); */
+          // Listar
+          $usuarios = $db->table('usuarios')->get();
+          foreach($usuarios as $usuario){
+               echo $usuario->nome. '<br>';          
+          }
 
 
      });
