@@ -38,20 +38,27 @@
      /* Middleware*/
      // Adicionando um middleware
      $app->add(function (Request $request, Response $response, $next) {
-          $response->write('Middleware 1 : inicio camada 1 +');
-          return $next($request, $response);
+          $response->write(' Middleware 1 : inicio camada 1 + ');
+          // O next permite avança para a execução das rotas
+          // guardamos a resposta da execução da rota:
+          $response = $next($request, $response);
+          // E após a execução fazemos outra tratativa e retornamos ela:
+          $response->write(' + Fim da camada 1');
+          return $response;
      });
      /* O middeware são acessados de forma inversa a sua definição logo é executado o segundo o primeiro e entt as rotas da aplicação são liberadas*/
      $app->add(function (Request $request, Response $response, $next) {
-          $response->write('Middleware 2 : inicio camada 2 +');
-          return $next($request, $response);
+          $response->write(' Middleware 2 : inicio camada 2 +');
+          $response = $next($request, $response);
+          $response->write(' + Fim da camada 2');
+          return $response;
      });
-    $app->get('/middleware_usuarios', function(Request $request, Response $response) {
+    $app->get('/usuarios', function(Request $request, Response $response) {
         
           $response->write('Ação principal usuarios');
           
      });
-    $app->get('/middleware_postagens', function(Request $request, Response $response) {
+    $app->get('/postagens', function(Request $request, Response $response) {
         
           $response->write('Ação principal postagens');
           
