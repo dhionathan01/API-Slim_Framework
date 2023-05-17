@@ -2,6 +2,7 @@
      require 'vendor/autoload.php';
      use \Psr\Http\Message\ServerRequestInterface as Request;
      use \Psr\Http\Message\ResponseInterface as Response;
+     use Illuminate\Database\Capsule\Manager as Capsule;
 
      // Criando objeto para definição das rotas
      $app = new \Slim\App([
@@ -24,9 +25,23 @@
                'collation' => 'utf8_unicode_ci',
                'prefix'    => ''
                ]);
+               $capsule->setAsGlobal();
+               $capsule->bootEloquent();
+               return $capsule;
      };
-     $capsule->setAsGlobal();
-     $capsule->bootEloquent();
+     $app->get('/usuarios', function(Request $request, Response $response) {
+          // instanciando banco de dados  
+          $db = $this->get('db')->schema();
+          $db->dropIfExists('usuarios');
+          $db->create('usuarios', function($table){
+               $table->increments('id');// criando uma coluna auto increment chamada id
+               $table->string('nome'); // criando uma coluna string
+               $table->string('email'); // criando uma coluna string
+               $table->timestamps();
+
+
+          });
+     });
      $app->run(); 
 
      /*
