@@ -35,6 +35,21 @@
           return $response->withHeader('Content-type', 'application/xml');
           
      });
+     /* Middleware*/
+     // Adicionando um middleware
+     $app->add(function (Request $request, Response $response, $next) {
+          return $response->write('inicio camada 1+');
+     });
+    $app->get('/middleware_usuarios', function(Request $request, Response $response) {
+        
+          $response->write('Ação principal usuarios');
+          
+     });
+    $app->get('/middleware_postagens', function(Request $request, Response $response) {
+        
+          $response->write('Ação principal postagens');
+          
+     });
      $app->run(); 
 
      // Container dependency injection
