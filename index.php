@@ -31,16 +31,22 @@
      };
      $app->get('/usuarios', function(Request $request, Response $response) {
           // instanciando banco de dados  
-          $db = $this->get('db')->schema();
-          $db->dropIfExists('usuarios');
-          $db->create('usuarios', function($table){
+          $db = $this->get('db');
+          /*
+          $db->dropIfExists->schema()->('usuarios');
+          // criando
+          $db->->schema()->create('usuarios', function($table){
                $table->increments('id');// criando uma coluna auto increment chamada id
                $table->string('nome'); // criando uma coluna string
                $table->string('email'); // criando uma coluna string
-               $table->timestamps();
+               $table->timestamps(); 
+          });*/
+          // Inserindo dados na tabela
+          $db->table('usuarios')->insert([
+               'nome' => 'Dhionathan', 'email' => 'dhionathan321@gmail.com'
+          ]);
 
 
-          });
      });
      $app->run(); 
 
