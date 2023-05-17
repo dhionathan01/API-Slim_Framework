@@ -41,10 +41,20 @@
                $table->string('email'); // criando uma coluna string
                $table->timestamps(); 
           });*/
+
           // Inserindo dados na tabela
-          $db->table('usuarios')->insert([
+
+         /*  $db->table('usuarios')->insert([
                'nome' => 'Dhionathan', 'email' => 'dhionathan321@gmail.com'
-          ]);
+          ]); */
+
+          // Atualizar:
+          $db->table('usuarios')
+                    ->where('id', 1)
+                    ->update([
+                         'nome'=> 'Dhionathan Lanzoni Jobim'
+                    ]);
+
 
 
      });
