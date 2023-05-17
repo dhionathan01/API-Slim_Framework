@@ -38,7 +38,12 @@
      /* Middleware*/
      // Adicionando um middleware
      $app->add(function (Request $request, Response $response, $next) {
-          $response->write('inicio camada 1+');
+          $response->write('Middleware 1 : inicio camada 1 +');
+          return $next($request, $response);
+     });
+     /* O middeware são acessados de forma inversa a sua definição logo é executado o segundo o primeiro e entt as rotas da aplicação são liberadas*/
+     $app->add(function (Request $request, Response $response, $next) {
+          $response->write('Middleware 2 : inicio camada 2 +');
           return $next($request, $response);
      });
     $app->get('/middleware_usuarios', function(Request $request, Response $response) {
